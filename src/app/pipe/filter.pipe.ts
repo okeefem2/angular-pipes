@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
+// pure: false forces update on data change
 @Pipe({
-  name: 'filter'
+  name: 'filter',
+  pure: true
 })
 export class FilterPipe implements PipeTransform {
 
@@ -9,7 +10,7 @@ export class FilterPipe implements PipeTransform {
     if (value.length > 0 && filterString !== '') {
       const resultArray = [];
       for (const item of value) {
-        if (item[propName] === filterString) {
+        if (item[propName].indexOf(filterString) > -1) {
           resultArray.push(item);
         }
       }
